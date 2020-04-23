@@ -27,7 +27,7 @@ function VideoUploadPage(props) {
     const [Category, setCategory] = useState("Film & Animaiton");
     const [FilePath, setFilePath] = useState("");
     const [Duration, setDuration] = useState("");
-    const [ThumbnatilPath, setThumbnatilPath] = useState("");
+    const [ThumbnailPath, setThumbnailPath] = useState("");
 
     const onTitleChange = (e) => {
         setVideoTitle(e.currentTarget.value);
@@ -68,7 +68,7 @@ function VideoUploadPage(props) {
                         .then(response => {
                             if (response.data.success) {
                                 setDuration(response.data.fileDuration);
-                                setThumbnatilPath(response.data.url);
+                                setThumbnailPath(response.data.url);
                             } else {
                                 alert('썸네일 생성에 실패 했습니다.');
                             }
@@ -91,7 +91,7 @@ function VideoUploadPage(props) {
             filePath: FilePath,
             category: Category,
             duration: Duration,
-            thumbnatil: ThumbnatilPath,
+            thumbnail: ThumbnailPath,
         };
 
         Axios.post('/api/video/uploadVideo', variable)
@@ -136,9 +136,9 @@ function VideoUploadPage(props) {
 
                     {/* Thumbnail */}
 
-                    {ThumbnatilPath &&
+                    {ThumbnailPath &&
                         <div>
-                            <img src={`http://localhost:5000/${ThumbnatilPath}`} alt="thumbnatil" />
+                            <img src={`http://localhost:5000/${ThumbnailPath}`} alt="thumbnatil" />
                         </div>
                     }
                 </div>
