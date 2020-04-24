@@ -57,6 +57,15 @@ router.get('/getVideos', (req, res) => {
         })
 })
 
+router.post('/getVideoDetail', (req, res) => {
+    Video.findOne({ "_id": req.body.videoId })
+        .populate('writer')
+        .exec((err, videoDetail) => {
+            if (err) return resizeTo.status(400).send(err);
+            return res.status(200).json({ success: true, videoDetail });
+        })
+})
+
 router.post('/thumbnail', (req, res) => {
     // 썸네일 생성 하고 비디어 러닝타임 가져오기
 
