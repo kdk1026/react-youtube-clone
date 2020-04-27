@@ -12,11 +12,11 @@ function SingleComment(props) {
     const [CommentValue, setCommentValue] = useState("");
 
     const onClickReplyOpen = () => {
-        setOpenReply(!OpenReply)
+        setOpenReply(!OpenReply);
     };
 
     const onHandleChange = (event) => {
-        setCommentValue(event.currentTarget.CommentValue)
+        setCommentValue(event.currentTarget.value);
     };
 
     const onSubmit = (event) => {
@@ -34,7 +34,8 @@ function SingleComment(props) {
                 if (response.data.success) {
                     // console.log(response.data.result);
                     setCommentValue("");
-                    props.refreshfunction(response.data.result);
+                    setOpenReply(false);
+                    props.refreshFunction(response.data.result);
                 } else {
                     alert('커멘트를 저장하지 못했습니다.')
                 }
@@ -50,7 +51,7 @@ function SingleComment(props) {
             <Comment
                 actions={actions}
                 author={props.comment.writer.name}
-                avatar={<Avatar src={props.comment.writer.image} alt />}
+                avatar={<Avatar src={props.comment.writer.image} alt="avatar" />}
                 content={ <p>{props.comment.content}</p> }
             />
 
